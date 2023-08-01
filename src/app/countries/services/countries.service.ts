@@ -10,12 +10,28 @@ export class CountriesService {
 
   constructor(private http: HttpClient) { }
 
-  searchCapital(term: string): Observable<Country[]> {
-    return this.http.get<Country[]>(`${this.apiUrl}/capital/${term}`).pipe(
+  searchCapital(capital: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}/capital/${capital}`).pipe(
       catchError( error => {
         return of([]);  // retornamos observable vacío
       } )
     );
+  }
+
+  searchCountry(country: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}/name/${country}`).pipe(
+      catchError( error => {
+        return of([]);  // retornamos observable vacío
+      })
+    );
+  }
+
+  searchRegion(region: string): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}/region/${region}`).pipe(
+      catchError( error => {
+        return of([]);  // retornamos observable vacío
+      })
+    )
   }
 
 }
